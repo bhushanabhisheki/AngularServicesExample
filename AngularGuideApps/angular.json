@@ -31,9 +31,13 @@
               "projects/service-example-app/src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "projects/service-example-app/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/@popperjs/core/dist/umd/popper.min.js",
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -98,9 +102,7 @@
               "projects/service-example-app/src/favicon.ico",
               "projects/service-example-app/src/assets"
             ],
-            "styles": [
-              "projects/service-example-app/src/styles.scss"
-            ],
+            "styles": ["projects/service-example-app/src/styles.scss"],
             "scripts": []
           }
         }
