@@ -8,8 +8,8 @@ import { LoggingService } from '../logging.service';
   styleUrls: ['./account.component.css'],
 })
 export class AccountComponent {
-  @Input() account: { name: string; status: string };
-  @Input() id: number;
+  @Input() account!: { name: string; status: string };
+  @Input() id!: number;
 
   constructor(private accountService: AccountService) {}
 
