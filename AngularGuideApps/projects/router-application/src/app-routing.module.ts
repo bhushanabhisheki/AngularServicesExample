@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ErrorPageComponent } from './app/error-page/error-page.component';
 import { HomeComponent } from './app/home/home.component';
 import { PageNotFoundComponent } from './app/page-not-found/page-not-found.component';
 import { CanDeactivateGuard } from './app/servers/edit-server/can-deactivate-guard.service';
@@ -31,7 +32,12 @@ const appRoutes: Routes = [
       },
     ],
   },
-  { path: 'not-found', component: PageNotFoundComponent },
+  //{ path: 'not-found', component: PageNotFoundComponent },
+  {
+    path: 'not-found',
+    component: ErrorPageComponent,
+    data: { message: 'Page not found !!' },
+  },
   { path: '**', redirectTo: '/not-found' },
 ];
 
