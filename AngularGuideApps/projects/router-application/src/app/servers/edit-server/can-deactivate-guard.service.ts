@@ -26,12 +26,3 @@ export class CanDeactivateGuard
     return component.canDeactivate();
   }
 }
-
-// canDeactivate(
-//   component: CanComponentDeactivate,
-//   currentRoute: ActivatedRouteSnapshot,
-//   currentState: ActivatedRouteSnapshot,
-//   nextState?: RouterStateSnapshot
-// ) {
-//   return component.canDeactivate();
-// }
