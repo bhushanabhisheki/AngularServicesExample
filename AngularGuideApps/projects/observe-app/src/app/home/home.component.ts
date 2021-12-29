@@ -6,6 +6,7 @@ import {
   observable,
   Observable,
   pipe,
+  filter,
   Subscription,
 } from 'rxjs';
 
@@ -38,6 +39,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
     this.customSubscription = customIntervalObservable
       .pipe(
+        filter((data: number) => {
+          return data > 0;
+        }),
         map((data: number) => {
           return 'Round: ' + data;
         })
