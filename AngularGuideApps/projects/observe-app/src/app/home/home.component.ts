@@ -28,6 +28,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     let customIntervalObservable = Observable.create((observer: any) => {
       setInterval(() => {
         observer.next(count * 4);
+        if (count === 2) observer.complete();
+        if (count > 3) {
+          observer.error(new Error('Count is greater than 3'));
+        }
         count++;
       }, 1000);
     });
@@ -38,9 +42,18 @@ export class HomeComponent implements OnInit, OnDestroy {
           return 'Round: ' + data;
         })
       )
-      .subscribe((data: any) => {
-        console.log(data);
-      });
+      .subscribe(
+        (data: any) => {
+          console.log(data);
+        },
+        (error: any) => {
+          alert(error.message);
+          console.log(error);
+        },
+        () => {
+          console.log('Completed !!!');
+        }
+      );
   }
 
   ngOnDestroy() {
