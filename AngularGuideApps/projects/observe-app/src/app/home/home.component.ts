@@ -25,23 +25,22 @@ export class HomeComponent implements OnInit, OnDestroy {
     // });
 
     let count = 0;
-    const customIntervalObservable = Observable.create((observer: any) => {
+    let customIntervalObservable = Observable.create((observer: any) => {
       setInterval(() => {
         observer.next(count * 4);
         count++;
       }, 1000);
     });
 
-    customIntervalObservable.pipe(
-      map((data: number) => {
-        return 'Round: ' + data;
-      })
-    );
-    this.customSubscription = customIntervalObservable.subscribe(
-      (data: any) => {
+    this.customSubscription = customIntervalObservable
+      .pipe(
+        map((data: number) => {
+          return 'Round: ' + data;
+        })
+      )
+      .subscribe((data: any) => {
         console.log(data);
-      }
-    );
+      });
   }
 
   ngOnDestroy() {
