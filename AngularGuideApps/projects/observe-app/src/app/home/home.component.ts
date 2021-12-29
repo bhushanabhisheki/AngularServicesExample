@@ -1,6 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 
-import { interval, Subscription } from 'rxjs';
+import {
+  interval,
+  map,
+  observable,
+  Observable,
+  pipe,
+  Subscription,
+} from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -9,15 +16,36 @@ import { interval, Subscription } from 'rxjs';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   private timerSubscription: Subscription | undefined;
+  private customSubscription: Subscription | undefined;
   constructor() {}
 
   ngOnInit() {
-    this.timerSubscription = interval(1000).subscribe((count: number) => {
-      console.log(count);
+    // this.timerSubscription = interval(1000).subscribe((count: number) => {
+    //   console.log(count);
+    // });
+
+    let count = 0;
+    const customIntervalObservable = Observable.create((observer: any) => {
+      setInterval(() => {
+        observer.next(count * 4);
+        count++;
+      }, 1000);
     });
+
+    customIntervalObservable.pipe(
+      map((data: number) => {
+        return 'Round: ' + data;
+      })
+    );
+    this.customSubscription = customIntervalObservable.subscribe(
+      (data: any) => {
+        console.log(data);
+      }
+    );
   }
 
   ngOnDestroy() {
-    if (this.timerSubscription) this.timerSubscription.unsubscribe();
+    //if (this.timerSubscription) this.timerSubscription.unsubscribe();
+    if (this.customSubscription) this.customSubscription.unsubscribe();
   }
 }

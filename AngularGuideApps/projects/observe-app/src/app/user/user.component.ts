@@ -7,7 +7,7 @@ import { ActivatedRoute, Params } from '@angular/router';
   styleUrls: ['./user.component.css'],
 })
 export class UserComponent implements OnInit {
-  id: number;
+  id: number | undefined;
 
   constructor(private route: ActivatedRoute) {}
 
