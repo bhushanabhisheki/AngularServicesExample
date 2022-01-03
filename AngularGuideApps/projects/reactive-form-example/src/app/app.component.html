@@ -11,6 +11,14 @@
             placeholder="Username"
             class="form-control"
           />
+          <span
+            *ngIf="
+              !signupForm.get('username')?.valid &&
+              signupForm.get('username')?.touched
+            "
+            class="help-block"
+            >Please enter a valid username</span
+          >
         </div>
         <br />
         <div class="form-group">
@@ -22,6 +30,14 @@
             placeholder="Email"
             class="form-control"
           />
+          <span
+            *ngIf="
+              !signupForm.get('email')?.valid &&
+              signupForm.get('email')?.touched
+            "
+            class="help-block"
+            >Please enter a valid email</span
+          >
         </div>
         <br />
         <div class="radio" *ngFor="let gender of genders">
@@ -35,6 +51,9 @@
           </label>
         </div>
         <br />
+        <span *ngIf="!signupForm.valid && signupForm.touched" class="help-block"
+          >Please enter a valid email</span
+        >
         <button class="btn btn-primary" type="submit">Submit</button>
       </form>
     </div>
