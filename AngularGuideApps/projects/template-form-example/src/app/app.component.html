@@ -88,11 +88,13 @@
       </form>
     </div>
   </div>
-  <hr />
-  <h3>Your Data</h3>
-  <p>Username : {{ user.username }}</p>
-  <p>EMail : {{ user.email }}</p>
-  <p>Secret Question : {{ user.secretQuestion }}</p>
-  <p>Answer : {{ user.answer }}</p>
-  <p>Gender : {{ user.gender }}</p>
+  <div *ngIf="submittted">
+    <hr />
+    <h3>Your Data</h3>
+    <p>Username : {{ user.username }}</p>
+    <p>EMail : {{ user.email }}</p>
+    <p>Secret Question : {{ user.secretQuestion }}</p>
+    <p>Answer : {{ user.answer }}</p>
+    <p>Gender : {{ user.gender }}</p>
+  </div>
 </div>

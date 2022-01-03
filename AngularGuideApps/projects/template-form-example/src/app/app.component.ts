@@ -18,6 +18,7 @@ export class AppComponent {
     answer: '',
     gender: '',
   };
+  submittted = false;
 
   suggestUserName() {
     const suggestedName = 'Superuser';
@@ -45,5 +46,6 @@ export class AppComponent {
     this.user.secretQuestion = this.signupform?.value.secret;
     this.user.answer = this.signupform?.value.qanswer;
     this.user.gender = this.signupform?.value.gender;
+    this.submittted = true;
   }
 }
