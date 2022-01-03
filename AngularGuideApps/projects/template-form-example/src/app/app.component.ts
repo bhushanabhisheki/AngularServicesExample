@@ -7,22 +7,29 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  @ViewChild('myform') signupform: NgForm | undefined;
+  @ViewChild('signupform') signupform: NgForm | undefined;
   defaultQuestion = 'teacher';
   answer = '';
   genders = ['male', 'female'];
+  user = {
+    username: '',
+    email: '',
+    secretQuestion: '',
+    answer: '',
+    gender: '',
+  };
 
   suggestUserName() {
     const suggestedName = 'Superuser';
-    // this.signupform?.setValue({
-    //   userData: {
-    //     username: suggestedName,
-    //     email: '',
-    //   },
-    //   secret: 'pet',
-    //   qanswer: 'test',
-    //   gender: 'male',
-    // });
+    this.signupform?.setValue({
+      userData: {
+        username: suggestedName,
+        email: 'bhushanabhisheki@gmail.com',
+      },
+      secret: 'pet',
+      qanswer: 'test',
+      gender: 'male',
+    });
 
     this.signupform?.form.patchValue({
       userData: {
@@ -32,6 +39,11 @@ export class AppComponent {
   }
 
   onSubmit() {
-    console.log(this.signupform);
+    this.user.username = this.signupform?.value.userData?.username;
+    console.log(this.signupform?.value);
+    this.user.email = this.signupform?.value.userData?.email;
+    this.user.secretQuestion = this.signupform?.value.secret;
+    this.user.answer = this.signupform?.value.qanswer;
+    this.user.gender = this.signupform?.value.gender;
   }
 }
