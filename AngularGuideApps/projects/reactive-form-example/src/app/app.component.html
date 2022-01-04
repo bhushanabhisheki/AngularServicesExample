@@ -18,7 +18,19 @@
                 signupForm.get('userData.username')?.touched
               "
               class="help-block"
-              >Please enter a valid username</span
+            >
+              <span
+                *ngIf="
+                  signupForm.get('userData.username')?.errors?.['required']"
+                class="help-block"
+                >Username required</span
+              >
+              <span
+                *ngIf="
+                  signupForm.get('userData.username')?.errors?.['nameIsForbidden']"
+                class="help-block"
+                >Username name is reserved.</span
+              ></span
             >
           </div>
           <br />
