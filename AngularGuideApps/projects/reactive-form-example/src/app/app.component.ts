@@ -8,7 +8,7 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class AppComponent implements OnInit {
   genders = ['male', 'female'];
-  signupForm: FormGroup;
+  signupForm: FormGroup | undefined;
   forbiddenUsersnames = ['chris', 'anna'];
 
   ngOnInit() {
@@ -31,11 +31,11 @@ export class AppComponent implements OnInit {
 
   onAddHobby() {
     const control = new FormControl(null, Validators.required);
-    (<FormArray>this.signupForm.get('hobbies')).push(control);
+    (<FormArray>this.signupForm?.get('hobbies')).push(control);
   }
 
   getControls() {
-    return (<FormArray>this.signupForm.get('hobbies')).controls;
+    return (<FormArray>this.signupForm?.get('hobbies')).controls;
   }
 
   forbiddenNames(control: FormControl): { [s: string]: boolean } | null {

@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+      <form *ngIf="signupForm" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
         <div formGroupName="userData">
           <div class="form-group">
             <label for="username">Username</label>
@@ -14,20 +14,20 @@
             />
             <span
               *ngIf="
-                !signupForm.get('userData.username')?.valid &&
-                signupForm.get('userData.username')?.touched
+                !signupForm?.get('userData.username')?.valid &&
+                signupForm?.get('userData.username')?.touched
               "
               class="help-block"
             >
               <span
                 *ngIf="
-                  signupForm.get('userData.username')?.errors?.['required']"
+                  signupForm?.get('userData.username')?.errors?.['required']"
                 class="help-block"
                 >Username required</span
               >
               <span
                 *ngIf="
-                  signupForm.get('userData.username')?.errors?.['nameIsForbidden']"
+                  signupForm?.get('userData.username')?.errors?.['nameIsForbidden']"
                 class="help-block"
                 >Username name is reserved.</span
               ></span
@@ -45,8 +45,8 @@
             />
             <span
               *ngIf="
-                !signupForm.get('userData.email')?.valid &&
-                signupForm.get('userData.email')?.touched
+                !signupForm?.get('userData.email')?.valid &&
+                signupForm?.get('userData.email')?.touched
               "
               class="help-block"
               >Please enter a valid email</span
@@ -77,7 +77,9 @@
           </div>
         </div>
         <br />
-        <span *ngIf="!signupForm.valid && signupForm.touched" class="help-block"
+        <span
+          *ngIf="!signupForm?.valid && signupForm?.touched"
+          class="help-block"
           >Please enter a valid email</span
         >
         <button class="btn btn-primary" type="submit">Submit</button>
