@@ -46,10 +46,24 @@
             <span
               *ngIf="
                 !signupForm?.get('userData.email')?.valid &&
-                signupForm?.get('userData.email')?.touched
+                signupForm?.get('userData.email')?.touched &&
+                !signupForm?.get('userData.email')?.errors?.['emailIsForbidden']
               "
               class="help-block"
-              >Please enter a valid email</span
+            >
+              Please enter a valid email</span
+            >
+            <!-- <span
+                *ngIf="
+                  signupForm?.get('userData.email')?.errors?.['required']"
+                class="help-block"
+                >Email required</span
+              > -->
+            <span
+              *ngIf="
+                  signupForm?.get('userData.email')?.errors?.['emailIsForbidden']"
+              class="help-block"
+              >Email already in use</span
             >
           </div>
         </div>
