@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { Post } from './post.model';
 import { PostsService } from './posts.service';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -25,9 +26,9 @@ export class AppComponent implements OnInit {
         this.loadedPosts = posts;
         this.isFetchingPosts = false;
       },
-      (err) => {
-        this.error = err.message;
-      }
+      catchError((error) => {
+        return throwError(error);
+      })
     );
   }
 
