@@ -9,7 +9,7 @@ import { Post } from './post.model';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  loadedPosts = [];
+  loadedPosts: Post[] = [];
   baseUrl: string =
     'https://newsample-fab58-default-rtdb.firebaseio.com/posts.json';
 
@@ -26,6 +26,7 @@ export class AppComponent implements OnInit {
       .post<{ name: string }>(this.baseUrl, postData)
       .subscribe((responseData) => {
         console.log(responseData.name);
+        this.fetchPosts();
       });
   }
 
@@ -46,11 +47,13 @@ export class AppComponent implements OnInit {
       )
       .subscribe((posts: Post[]) => {
         console.log(posts);
+        this.loadedPosts = posts;
       });
   }
 
   onFetchPosts() {
     // Send Http request
+    this.fetchPosts();
   }
 
   onClearPosts() {
