@@ -65,7 +65,12 @@
         </li>
       </ul>
 
-      <p *ngIf="isFetchingPosts">Loading posts...</p>
+      <p *ngIf="isFetchingPosts && !error">Loading posts...</p>
+
+      <div class="alert alert-danger" *ngIf="error">
+        <h1>An error has occurred</h1>
+        <p>{{ error }}</p>
+      </div>
     </div>
   </div>
 </div>

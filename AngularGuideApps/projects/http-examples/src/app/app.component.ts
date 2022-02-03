@@ -12,6 +12,7 @@ import { PostsService } from './posts.service';
 export class AppComponent implements OnInit {
   loadedPosts: Post[] = [];
   isFetchingPosts: boolean = false;
+  error?: string;
   baseUrl: string =
     'https://newsample-fab58-default-rtdb.firebaseio.com/posts.json';
 
@@ -19,10 +20,15 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.isFetchingPosts = true;
-    this.postsService.fetchPosts().subscribe((posts) => {
-      this.loadedPosts = posts;
-      this.isFetchingPosts = false;
-    });
+    this.postsService.fetchPosts().subscribe(
+      (posts) => {
+        this.loadedPosts = posts;
+        this.isFetchingPosts = false;
+      },
+      (err) => {
+        this.error = err.message;
+      }
+    );
   }
 
   onCreatePost(postData: Post) {
@@ -37,10 +43,15 @@ export class AppComponent implements OnInit {
   onFetchPosts() {
     this.isFetchingPosts = true;
     // Send Http request
-    this.postsService.fetchPosts().subscribe((posts) => {
-      this.loadedPosts = posts;
-      this.isFetchingPosts = false;
-    });
+    this.postsService.fetchPosts().subscribe(
+      (posts) => {
+        this.loadedPosts = posts;
+        this.isFetchingPosts = false;
+      },
+      (err) => {
+        this.error = err.message;
+      }
+    );
   }
 
   onClearPosts() {
