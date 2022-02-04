@@ -13,23 +13,14 @@ import { throwError } from 'rxjs';
 export class AppComponent implements OnInit {
   loadedPosts: Post[] = [];
   isFetchingPosts: boolean = false;
-  error?: string;
+  error: string | undefined | null;
   baseUrl: string =
     'https://newsample-fab58-default-rtdb.firebaseio.com/posts.json';
 
   constructor(private http: HttpClient, private postsService: PostsService) {}
 
   ngOnInit() {
-    this.isFetchingPosts = true;
-    this.postsService.fetchPosts().subscribe(
-      (posts) => {
-        this.loadedPosts = posts;
-        this.isFetchingPosts = false;
-      },
-      catchError((error) => {
-        return throwError(error);
-      })
-    );
+    this.onFetchPosts();
   }
 
   onCreatePost(postData: Post) {
@@ -51,6 +42,7 @@ export class AppComponent implements OnInit {
       },
       (err) => {
         this.error = err.message;
+        this.isFetchingPosts = false;
       }
     );
   }
@@ -60,5 +52,9 @@ export class AppComponent implements OnInit {
     this.postsService.deletePosts().subscribe((data) => {
       this.onFetchPosts();
     });
+  }
+
+  onHandleError() {
+    this.error = null;
   }
 }
